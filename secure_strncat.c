@@ -1,30 +1,33 @@
+
 #include <stdio.h>
 
+// secure_strncat( destination array, 
+//			       source array length, 
+//			       copied string )
 
 char * secure_strncat(char * dst, size_t sizeDst, const char * src)
 {
-    size_t dlzkaZdroja = strlen(src);
-    size_t celkovaDlzka = strlen(dst) + dlzkaZdroja;
+    size_t srcLength = strlen(src);
+    size_t totalLength = strlen(dst) + srcLength;
     
-    if (celkovaDlzka < sizeDst)
+    if (totalLength < sizeDst)
     {
-
-	   return strncat(dst, src, dlzkaZdroja);
+	   // copy string to destination
+	   return strncat(dst, src, srcLength);
     }
     else
-
+	   // return untouched destination
 	   return dst;
 }
 
 int main(int argc, char *argv[])
 {
     /* Usage */
-    char Array[10] = "0123";
-    char String[]  = "45678";
+    char destArray[10] = "0123";
+    char srcString[]  = "45678";
 
-    printf("\n%s\n", secure_strncat(Array, sizeof(Array), String));
+    printf("%s\n", secure_strncat(destArray, sizeof(destArray), srcString));
     
-    getchar();
     return 0;
 }
 

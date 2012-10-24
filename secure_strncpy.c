@@ -1,17 +1,21 @@
+
 #include "stdio.h"
 
+// secure_strncpy( destination array, 
+//			       size of destination array,
+//			       copied string )
 
 char * secure_strncpy(char *dst,  size_t sizeDst, const char *src )
 {
     size_t lenSrc = strlen(src);
-
+    // is copied string shorter than destination?
     if ( sizeDst > lenSrc )
     {
 	   dst[lenSrc] = '\0';
 	   return strncpy(dst, src, lenSrc);
     }
     else
-
+	   // return untouched destination
 	   return dst;
     
 }
@@ -19,18 +23,17 @@ char * secure_strncpy(char *dst,  size_t sizeDst, const char *src )
 int main(int argc, char *argv[])
 {
     /* Usage */
-    char destBuffer[10];
+    char destArray[10];
     char *srcString = "012345678";
 
-    secure_strncpy(destBuffer, sizeof(destBuffer), srcString);
+    secure_strncpy(destArray, sizeof(destArray), srcString);
 
-
-    if(strncmp(destBuffer,srcString, sizeof(destBuffer)) == 0)
-	   printf("%s\n", destBuffer );
+    /* if equal, return will be zero */
+    if(strncmp(destArray,srcString, sizeof(destArray)) == 0)
+	   printf("%s\n", destArray );
     else
-	   printf("Error.\n");
+	   printf("failed to copy string.\n");
     
-    getchar();
     return 0;
 }
 
